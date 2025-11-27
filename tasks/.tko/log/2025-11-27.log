@@ -1,0 +1,4 @@
+2025-11-27 15:35:25, MOVE, v:1, k:poo@agenda, mode:DOWN
+2025-11-27 15:35:26, MOVE, v:1, k:poo@agenda, mode:PICK
+2025-11-27 16:18:17, EXEC, v:1, k:poo@agenda, mode:FREE, size:22
+2025-11-27 16:36:15, MOVE, v:1, k:poo@agenda, mode:BACK

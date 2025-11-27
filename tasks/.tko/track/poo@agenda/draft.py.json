@@ -1,0 +1,9 @@
+{
+    "patches": [
+        {
+            "label": "2025-11-27_16-18-17",
+            "content": "class Fone:\n    def __init__(self, id, number):\n        self.id = id\n        self.number = number\n\n    def isValid(self):\n        validos = \"0123456789().-\"\n        for i in self.number:\n            if i in validos:\n                return True\n            return False\n        \n    def __str__(self):\n        return \"{self.id}:{self.number}\"\n    \nprint(\"teste\")\nf1 = Fone(\"casa\", \"1234\")\nf2 = Fone(\"errado\", \"12a4\")\n\nprint(f1.isValid())\nprint(f2.isValid())\nprint(f1)",
+            "lines": "22"
+        }
+    ]
+}
