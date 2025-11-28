@@ -15,10 +15,43 @@ class Fone:
     def __str__(self) -> str:
         return f"{self.id}:{self.number}"
     
-print("teste")
-f1 = Fone("casa", "1234")
-f2 = Fone("errado", "12a4")
+class Contact:
+    def __init__(self, name):
+        self.name = name
+        self.fones = []
+        self.favorited = False
 
-print(f1.isValid())
-print(f2.isValid())
-print(f1)
+    def addFone(self, id, number):
+        f = Fone(id, number)
+        if f.isValid():
+            self.fones.append(f)
+        else:
+            print("Fone Ruim")
+
+    def rmFone(self, index): 
+        if index >= 0 or index < len(self.fones):
+            self.fones.pop(index)
+        else:
+            print("Indice não existe")
+
+    def toggleFavorited(self):
+        self.favorited = not self.favorited
+
+    def isFavorited(self):
+        return self.favorited
+    
+    def __str__(self):
+        saida_fones = []
+        for f in self.fones:
+            saida_fones.append(str(f))
+        prefixo = "@" if self.favorited else "-"
+
+        return f"{prefixo} {self.name} [{', '.join(saida_fones)}]"
+print("\nteste")
+try:
+    c = Contact("ana")
+    c.addFone("oi", "123")
+    c.addFone("tim", "99a")
+    print(c)
+except Exception as e:
+         print("deu erro")

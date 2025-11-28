@@ -2,8 +2,23 @@
     "patches": [
         {
             "label": "2025-11-27_16-18-17",
-            "content": "class Fone:\n    def __init__(self, id, number):\n        self.id = id\n        self.number = number\n\n    def isValid(self):\n        validos = \"0123456789().-\"\n        for i in self.number:\n            if i in validos:\n                return True\n            return False\n        \n    def __str__(self):\n        return \"{self.id}:{self.number}\"\n    \nprint(\"teste\")\nf1 = Fone(\"casa\", \"1234\")\nf2 = Fone(\"errado\", \"12a4\")\n\nprint(f1.isValid())\nprint(f2.isValid())\nprint(f1)",
+            "content": "@@ -34,21 +34,16 @@\n , id\n-: str\n , number\n : st\n@@ -42,13 +42,8 @@\n mber\n-: str\n ):%0A \n@@ -117,16 +117,8 @@\n elf)\n- -%3E bool\n :%0A  \n@@ -162,20 +162,17 @@\n     for \n-char\n+i\n  in self\n@@ -199,16 +199,9 @@\n  if \n-char not\n+i\n  in \n@@ -232,20 +232,19 @@\n  return \n-Fals\n+Tru\n e%0A      \n@@ -253,40 +253,19 @@\n     \n-%0A            %0A        \n return \n-Tru\n+Fals\n e%0A  \n@@ -296,15 +296,8 @@\n elf)\n- -%3E str\n :%0A  \n@@ -309,17 +309,16 @@\n  return \n-f\n %22%7Bself.i\n@@ -344,822 +344,123 @@\n    %0A\n-class Contact:%0A    def __init__(self, name):%0A        self.name = name%0A        self.fones = %5B%5D%0A        self.favorited = False%0A%0A    def addFone(self, id, nunmber):%0A        f = Fone(id, number)%0A        if f.isValid:%0A            self.fones.push(f)%0A        else:%0A            print(%22Fone Ruim%22)%0A%0A    def rmFone(self, index): %0A        if index %3C 0 or index %3E len(self.fones):%0A            self.fones.pop(index)%0A        else:%0A            print(%22Indice n%C3%A3o existe%22)%0A%0A    def toggleFavorited(self):%0A        self.favorited == True%0A%0A    def isFavorited(self):%0A        return self.favorited%0A    %0A    def __str__(self):%0A        return %22- %22 + self.name + %22 %22 + self.fones%0Aprint(%22%5Cnteste%22)%0Atry:%0A    c = Contact(%22ana%22)%0A    c.addFone(%22oi%22, %22123%22)%0A    c.addFone(%22tim%22, %2299a%22)%0A    print(c)%0Aexcept Exception as e:%0A         print(%22deu erro%22\n+print(%22teste%22)%0Af1 = Fone(%22casa%22, %221234%22)%0Af2 = Fone(%22errado%22, %2212a4%22)%0A%0Aprint(f1.isValid())%0Aprint(f2.isValid())%0Aprint(f1\n )\n",
             "lines": "22"
+        },
+        {
+            "label": "2025-11-28_15-35-51",
+            "content": "@@ -556,15 +556,16 @@\n , nu\n+n\n mber):%0A\n-\n     \n@@ -609,18 +609,16 @@\n .isValid\n-()\n :%0A      \n@@ -634,22 +634,20 @@\n f.fones.\n-append\n+push\n (f)%0A    \n@@ -739,10 +739,9 @@\n dex \n-%3E=\n+%3C\n  0 o\n@@ -748,17 +748,17 @@\n r index \n-%3C\n+%3E\n  len(sel\n@@ -916,26 +916,12 @@\n  == \n-not self.favorited\n+True\n %0A%0A  \n@@ -1015,209 +1015,50 @@\n     \n-saida_fones = %5B%5D%0A        for f in self.fones:%0A            saida_fones.append(str(f))%0A        prefixo = %22@%22 if self.favorited else %22-%22%0A%0A        return f%22%7Bprefixo%7D %7Bself.name%7D %5B%7B', '.join(saida_\n+return %22- %22 + self.name + %22 %22 + self.\n fones\n-)%7D%5D%22\n %0Apri\n",
+            "lines": "52"
+        },
+        {
+            "label": "2025-11-28_15-44-17",
+            "content": "@@ -914,16 +914,17 @@\n orited =\n+=\n  not sel\n",
+            "lines": "57"
+        },
+        {
+            "label": "2025-11-28_15-49-10",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def isValid(self) -> bool:\n        validos = \"0123456789().-\"\n        for char in self.number:\n            if char not in validos:\n                return False\n            \n            \n        return True\n        \n    def __str__(self) -> str:\n        return f\"{self.id}:{self.number}\"\n    \nclass Contact:\n    def __init__(self, name):\n        self.name = name\n        self.fones = []\n        self.favorited = False\n\n    def addFone(self, id, number):\n        f = Fone(id, number)\n        if f.isValid():\n            self.fones.append(f)\n        else:\n            print(\"Fone Ruim\")\n\n    def rmFone(self, index): \n        if index >= 0 or index < len(self.fones):\n            self.fones.pop(index)\n        else:\n            print(\"Indice n\u00e3o existe\")\n\n    def toggleFavorited(self):\n        self.favorited = not self.favorited\n\n    def isFavorited(self):\n        return self.favorited\n    \n    def __str__(self):\n        saida_fones = []\n        for f in self.fones:\n            saida_fones.append(str(f))\n        prefixo = \"@\" if self.favorited else \"-\"\n\n        return f\"{prefixo} {self.name} [{', '.join(saida_fones)}]\"\nprint(\"\\nteste\")\ntry:\n    c = Contact(\"ana\")\n    c.addFone(\"oi\", \"123\")\n    c.addFone(\"tim\", \"99a\")\n    print(c)\nexcept Exception as e:\n         print(\"deu erro\")",
+            "lines": "57"
         }
     ]
 }
