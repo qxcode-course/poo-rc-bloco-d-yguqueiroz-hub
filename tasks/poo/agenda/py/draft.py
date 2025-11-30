@@ -29,7 +29,7 @@ class Contact:
             print("Fone Ruim")
 
     def rmFone(self, index): 
-        if index >= 0 or index < len(self.fones):
+        if index >= 0 and index < len(self.fones):
             self.fones.pop(index)
         else:
             print("Indice não existe")
@@ -47,11 +47,29 @@ class Contact:
         prefixo = "@" if self.favorited else "-"
 
         return f"{prefixo} {self.name} [{', '.join(saida_fones)}]"
-print("\nteste")
-try:
-    c = Contact("ana")
-    c.addFone("oi", "123")
-    c.addFone("tim", "99a")
-    print(c)
-except Exception as e:
-         print("deu erro")
+class Agenda:
+    def __init__(self):
+        self.contacts = []
+
+    def findPosByName(self, nagme):
+        for i in range(len(self.contacts)):
+            if self.contacts[i].name == name:
+                return i
+        return -1
+    def addContact(self, name, fones):
+        novo = Contact(name)
+        if pos != -1:
+
+    def search(self, pattern):
+        res = []
+        for c in self.contacts:
+            if c.name.find(pattern):
+                res.append(c)
+        return res
+    
+    def getContacts(self):
+        return self.contacts
+    
+    def __str__(self):
+        return str(self.contacts)
+    
