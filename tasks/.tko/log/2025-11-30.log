@@ -2,3 +2,8 @@
 2025-11-30 17:17:50, EXEC, v:1, k:poo@agenda, mode:FREE, size:76
 2025-11-30 17:19:47, EXEC, v:1, k:poo@agenda, mode:FREE, size:75
 2025-11-30 18:26:03, MOVE, v:1, k:poo@agenda, mode:BACK
+2025-11-30 20:52:07, MOVE, v:1, k:poo@agenda, mode:PICK
+2025-11-30 20:52:19, EXEC, v:1, k:poo@agenda, mode:FREE, size:75
+2025-11-30 20:55:10, EXEC, v:1, k:poo@agenda, mode:FREE, size:78
+2025-11-30 21:03:52, EXEC, v:1, k:poo@agenda, mode:FREE, size:98
+2025-11-30 21:09:11, MOVE, v:1, k:poo@agenda, mode:BACK

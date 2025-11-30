@@ -51,19 +51,28 @@ class Agenda:
     def __init__(self):
         self.contacts = []
 
-    def findPosByName(self, nagme):
+    def findPosByName(self, name):
         for i in range(len(self.contacts)):
             if self.contacts[i].name == name:
                 return i
         return -1
     def addContact(self, name, fones):
-        novo = Contact(name)
+        pos = self.findPosByName(name)
+
         if pos != -1:
+            contato = self.contacts[pos]
+        else:
+            contato = Contact(name)
+            self.contacts.append(contato)
+            self.contacts.sort(key=lambda c: c.name)
+
+        for f in fones:
+            contato.addFone(f.id, f.number)
 
     def search(self, pattern):
         res = []
         for c in self.contacts:
-            if c.name.find(pattern):
+            if pattern in str(c):
                 res.append(c)
         return res
     
@@ -71,5 +80,19 @@ class Agenda:
         return self.contacts
     
     def __str__(self):
-        return str(self.contacts)
+        saida = ""
+        for c in self.contacts:
+            saida += str(c) + "\n"
+        return saida
     
+print("teste")
+try:
+    a = Agenda()
+    fones_teste = [Fone("oi", "123")]
+
+    a.addContact("bia", fones_teste)
+    a.addContact("ana", fones_teste)
+
+    print(a)
+except Exception as e:
+    print("deu erro na agenda: ", e)
