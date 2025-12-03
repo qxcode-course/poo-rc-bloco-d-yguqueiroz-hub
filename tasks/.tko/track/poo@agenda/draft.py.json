@@ -52,8 +52,98 @@
         },
         {
             "label": "2025-12-02_18-30-00",
-            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def isValid(self) -> bool:\n        validos = \"0123456789().-\"\n        for char in self.number:\n            if char not in validos:\n                return False\n            \n            \n        return True\n        \n    def __str__(self) -> str:\n        return f\"{self.id}:{self.number}\"\n    \nclass Contact:\n    def __init__(self, name):\n        self.name = name\n         self.fones = []\n        self.favorited = False\n\n    def addFone(self, id, number):\n        f = Fone(id, number)\n        if f.isValid():\n            self.fones.append(f)\n        else:\n            print(\"Fone Ruim\")\n\n    def rmFone(self, index): \n        if index >= 0 and index < len(self.fones):\n            self.fones.pop(index)\n        else:\n            print(\"Indice n\u00e3o existe\")\n\n    def toggleFavorited(self):\n        self.favorited = not self.favorited\n\n    def isFavorited(self):\n        return self.favorited\n    \n    def __str__(self):\n        saida_fones = []\n        for f in self.fones:\n            saida_fones.append(str(f))\n        prefixo = \"@\" if self.favorited else \"-\"\n\n        return f\"{prefixo} {self.name} [{', '.join(saida_fones)}]\"\nclass Agenda:\n    def __init__(self):\n        self.contacts = []\n\n    def findPosByName(self, name):\n        for i in range(len(self.contacts)):\n            if self.contacts[i].name == name:\n                return i\n        return -1\n    def addContact(self, name, fones):\n        pos = self.findPosByName(name)\n\n        if pos != -1:\n            contato = self.contacts[pos]\n        else:\n            contato = Contact(name)\n            self.contacts.append(contato)\n            self.contacts.sort(key=lambda c: c.name)\n\n        for f in fones:\n            contato.addFone(f.id, f.number)\n\n    def search(self, pa\n            ttern):\n        res = []\n        for c in self.contacts:\n            if pattern in str(c):\n                res.append(c)\n        return res\n    \n    def getContacts(self):\n        return self.contacts\n    \n    def __str__(self):\n        saida = \"\"\n        for c in self.contacts:\n            saida += str(c) + \"\\n\"\n        return saida\n    \nprint(\"teste\")\ntry:\n    a = Agenda()\n    fones_teste = [Fone(\"oi\", \"123\")]\n\n    a.addContact(\"bia\", fones_teste)\n    a.addContact(\"ana\", fones_teste)\n\n    print(a)\nexcept Exception as e:\n    print(\"deu erro na agenda: \", e)\n",
+            "content": "@@ -2428,643 +2428,4 @@\n  e)%0A\n-%0Aagenda = Agenda()%0A%0Awhile True:%0A    try:%0A        line = input(%22$%22)%0A        parts = line.split(%22 %22)%0A        cmd = parts%5B0%5D%0A%0A        if cmd == %22end%22:%0A            break%0A        elif cmd == %22add%22:%0A            name = parts%5B1%5D%0A            fones_str = parts%5B2%5D%0A            lista_fones = %5B%5D%0A            for item in fones_str:%0A                div = item.split(%22:%22)%0A                lista_fones.append(Fone(div%5B0%5D, div%5B1%5D))%0A%0A            agenda.addContact(name, lista_fones)%0A%0A        elif cmd == %22show%22:%0A            print(agenda)%0A%0A        else:%0A            print(%22comando errado%22)%0A    except Exception as e:%0A        print(%22Deu erro no loop:%22, e)%0A%0A    \n",
             "lines": "99"
+        },
+        {
+            "label": "2025-12-03_16-35-46",
+            "content": "@@ -468,32 +468,33 @@\n  = name%0A        \n+ \n self.fones = %5B%5D%0A\n@@ -1846,16 +1846,29 @@\n self, pa\n+%0A            \n ttern):%0A\n",
+            "lines": "129"
+        },
+        {
+            "label": "2025-12-03_16-38-18",
+            "content": "@@ -2476,113 +2476,12 @@\n put(\n-)%0A        if not line:%0A            continue%0A        if line.startswith(%22$%22):%0A            line = line%5B1:%5D%0A\n+%22$%22)\n %0A   \n@@ -2576,17 +2576,16 @@\n   break%0A\n-%0A\n         \n@@ -2649,20 +2649,19 @@\n   fones_\n-args\n+str\n  = parts\n@@ -2709,21 +2709,20 @@\n     for \n-token\n+item\n  in fone\n@@ -2727,12 +2727,11 @@\n nes_\n-args\n+str\n :%0A  \n@@ -2749,20 +2749,17 @@\n    d\n-ados = token\n+iv = item\n .spl\n@@ -2770,48 +2770,8 @@\n :%22)%0A\n-                if len(dados) == 2:%0A    \n     \n@@ -2811,22 +2811,18 @@\n ne(d\n-ados\n+iv\n %5B0%5D, d\n-ados\n+iv\n %5B1%5D)\n@@ -2928,24 +2928,16 @@\n agenda)%0A\n-        \n %0A       \n@@ -2943,583 +2943,47 @@\n   el\n-if cmd == %22rm%22:%0A            name = parts%5B1%5D%0A            agenda.rmContact(name)%0A%0A        elif cmd == %22search%22:%0A            pattern = parts%5B1%5D%0A            res = agenda.search(pattern)%0A            for c in res:%0A                print(c)%0A%0A        elif cmd == %22tfav%22:%0A            name = parts%5B1%5D%0A            pos = agenda.findPosByName(name)%0A            if pos != -1:%0A                agenda.contacts%5Bpos%5D.toggleFavorited()%0A%0A        elif cmd == %22favs%22:%0A            res = agenda.getFavorited()%0A            for c in res:%0A                print(c)%0A%0A    except EOFError:%0A            break\n+se:%0A            print(%22comando errado%22)\n %0A   \n",
+            "lines": "128"
+        },
+        {
+            "label": "2025-12-03_16-49-56",
+            "content": "@@ -3745,47 +3745,8 @@\n e)%0A%0A\n-if __name__ == %22__main__%22:%0A    main()%0A%0A\n     \n",
+            "lines": "156"
+        },
+        {
+            "label": "2025-12-03_16-52-32",
+            "content": "@@ -2520,71 +2520,8 @@\n nue%0A\n-        print(f%22$%7Bline%7D if not line.startswith(%22$) else line%22)%0A\n     \n",
+            "lines": "159"
+        },
+        {
+            "label": "2025-12-03_16-53-43",
+            "content": "@@ -2539,17 +2539,16 @@\n %22$%7Bline%7D\n-%22\n  if not \n@@ -2583,23 +2583,8 @@\n e%22)%0A\n-              %0A\n     \n",
+            "lines": "160"
+        },
+        {
+            "label": "2025-12-03_16-54-15",
+            "content": "@@ -2566,17 +2566,16 @@\n swith(%22$\n-%22\n ) else l\n",
+            "lines": "161"
+        },
+        {
+            "label": "2025-12-03_16-54-31",
+            "content": "@@ -2578,16 +2578,17 @@\n lse line\n+%22\n )%0A      \n",
+            "lines": "161"
+        },
+        {
+            "label": "2025-12-03_16-54-44",
+            "content": "@@ -2180,16 +2180,245 @@\n rn saida\n+%0A    %0Aprint(%22teste%22)%0Atry:%0A    a = Agenda()%0A    fones_teste = %5BFone(%22oi%22, %22123%22)%5D%0A%0A    a.addContact(%22bia%22, fones_teste)%0A    a.addContact(%22ana%22, fones_teste)%0A%0A    print(a)%0Aexcept Exception as e:%0A    print(%22deu erro na agenda: %22, e)\n %0A%0Aagenda\n",
+            "lines": "161"
+        },
+        {
+            "label": "2025-12-03_16-55-07",
+            "content": "@@ -2186,24 +2186,8 @@\n da%0A%0A\n-def main():%0A    \n agen\n@@ -2200,20 +2200,17 @@\n genda()%0A\n-    \n+%0A\n while Tr\n@@ -2213,20 +2213,16 @@\n e True:%0A\n-    \n     try:\n@@ -2226,28 +2226,24 @@\n ry:%0A        \n-    \n line = input\n@@ -2253,20 +2253,16 @@\n         \n-   \n- \n if not l\n@@ -2274,28 +2274,24 @@\n             \n-    \n continue%0A   \n@@ -2291,28 +2291,24 @@\n nue%0A        \n- \n-   \n print(f%22$%7Bli\n@@ -2357,39 +2357,33 @@\n )%0A              \n-  %0A    \n+%0A\n         if line.\n@@ -2407,28 +2407,24 @@\n             \n-   \n- \n line = line%5B\n@@ -2428,20 +2428,16 @@\n ne%5B1:%5D%0A%0A\n-    \n         \n@@ -2468,20 +2468,16 @@\n         \n-  \n-  \n cmd = pa\n@@ -2484,20 +2484,16 @@\n rts%5B0%5D%0A%0A\n-    \n         \n@@ -2525,23 +2525,15 @@\n     \n-    \n break%0A%0A\n-    \n     \n@@ -2551,28 +2551,24 @@\n d == %22add%22:%0A\n-    \n             \n@@ -2595,20 +2595,16 @@\n         \n-    \n fones_ar\n@@ -2621,36 +2621,32 @@\n %5B2%5D%0A            \n-   \n- \n lista_fones = %5B%5D\n@@ -2642,28 +2642,24 @@\n _fones = %5B%5D%0A\n-    \n             \n@@ -2699,20 +2699,16 @@\n         \n- \n-   \n dados = \n@@ -2736,28 +2736,24 @@\n             \n-   \n- \n if len(dados\n@@ -2760,20 +2760,16 @@\n ) == 2:%0A\n-    \n         \n@@ -2834,28 +2834,24 @@\n             \n- \n-   \n agenda.addCo\n@@ -2876,20 +2876,16 @@\n fones)%0A%0A\n-    \n         \n@@ -2912,28 +2912,24 @@\n             \n-    \n print(agenda\n@@ -2934,33 +2934,25 @@\n da)%0A        \n-  \n-  %0A    \n+%0A\n         elif\n@@ -2969,36 +2969,32 @@\n m%22:%0A            \n-    \n name = parts%5B1%5D%0A\n@@ -3001,28 +3001,24 @@\n             \n-  \n-  \n agenda.rmCon\n@@ -3029,36 +3029,32 @@\n (name)%0A%0A        \n-    \n elif cmd == %22sea\n@@ -3071,20 +3071,16 @@\n         \n- \n-   \n pattern \n@@ -3094,36 +3094,32 @@\n %5B1%5D%0A            \n-   \n- \n res = agenda.sea\n@@ -3135,36 +3135,32 @@\n rn)%0A            \n-    \n for c in res:%0A  \n@@ -3165,36 +3165,32 @@\n                 \n- \n-   \n print(c)%0A%0A      \n@@ -3183,36 +3183,32 @@\n int(c)%0A%0A        \n-   \n- \n elif cmd == %22tfa\n@@ -3215,36 +3215,32 @@\n v%22:%0A            \n-    \n name = parts%5B1%5D%0A\n@@ -3247,28 +3247,24 @@\n             \n-  \n-  \n pos = agenda\n@@ -3280,28 +3280,24 @@\n yName(name)%0A\n-    \n             \n@@ -3322,28 +3322,24 @@\n             \n-    \n agenda.conta\n@@ -3370,28 +3370,24 @@\n ()%0A%0A        \n-    \n elif cmd == \n@@ -3394,20 +3394,16 @@\n %22favs%22:%0A\n-    \n         \n@@ -3438,36 +3438,32 @@\n d()%0A            \n-    \n for c in res:%0A  \n@@ -3468,36 +3468,32 @@\n                 \n-    \n print(c)%0A%0A      \n@@ -3482,28 +3482,24 @@\n   print(c)%0A%0A\n-    \n     except E\n@@ -3523,22 +3523,14 @@\n     \n-    \n break%0A\n-    \n     \n@@ -3552,20 +3552,16 @@\n n as e:%0A\n-    \n         \n",
+            "lines": "149"
+        },
+        {
+            "label": "2025-12-03_16-56-29",
+            "content": "@@ -2692,17 +2692,16 @@\n  parts%5B2\n-:\n %5D%0A      \n",
+            "lines": "149"
+        },
+        {
+            "label": "2025-12-03_16-58-05",
+            "content": "@@ -2301,63 +2301,8 @@\n ne:%0A\n-                break%0A            if not line.strip():%0A\n     \n",
+            "lines": "149"
+        },
+        {
+            "label": "2025-12-03_17-04-00",
+            "content": "@@ -2377,29 +2377,16 @@\n ontinue%0A\n-            %0A\n         \n",
+            "lines": "151"
+        },
+        {
+            "label": "2025-12-03_17-04-08",
+            "content": "@@ -1826,299 +1826,8 @@\n r)%0A%0A\n-    def rmContact(self, name):%0A        pos = self.findPosByName(name)%0A        if pos != -1:%0A            self.contacts.pop(pos)%0A%0A    def getFavorited(self):%0A        favs = %5B%5D%0A        for c in self.contacts:%0A            if c.isFavorited():%0A                favs.append(c)%0A        return favs%0A%0A%0A\n     \n@@ -1853,16 +1853,16 @@\n ttern):%0A\n+\n         \n@@ -2180,24 +2180,16 @@\n rn saida\n-.strip()\n %0A%0Adef ma\n@@ -2377,16 +2377,28 @@\n ontinue%0A\n+            \n %0A       \n",
+            "lines": "152"
+        },
+        {
+            "label": "2025-12-03_17-07-54",
+            "content": "@@ -2867,60 +2867,12 @@\n lit(\n-)%0A            if not parts:%0A                continue\n+%22 %22)\n %0A   \n",
+            "lines": "165"
+        },
+        {
+            "label": "2025-12-03_17-08-41",
+            "content": "@@ -2908,33 +2908,32 @@\n        continue%0A\n-%0A\n             cmd \n@@ -3385,248 +3385,8 @@\n s)%0A%0A\n-            elif cmd == %22rmFone%22:%0A                name = parts%5B1%5D%0A                index =  int(parts%5B2%5D)%0A                pos = agenda.findPosByName(name)%0A                if pos != -1:%0A                    agenda.contacts%5Bpos%5D.rmFone(index)%0A%0A\n     \n",
+            "lines": "167"
+        },
+        {
+            "label": "2025-12-03_17-10-12",
+            "content": "@@ -2508,16 +2508,17 @@\n nda = Ag\n+e\n nda()%0A  \n",
+            "lines": "175"
+        },
+        {
+            "label": "2025-12-03_17-10-44",
+            "content": "@@ -570,19 +570,16 @@\n      f =\n-   \n  Fone(id\n@@ -2508,17 +2508,16 @@\n nda = Ag\n-e\n nda()%0A  \n",
+            "lines": "175"
+        },
+        {
+            "label": "2025-12-03_19-03-47",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def isValid(self) -> bool:\n        validos = \"0123456789().-\"\n        for char in self.number:\n            if char not in validos:\n                return False\n            \n            \n        return True\n        \n    def __str__(self) -> str:\n        return f\"{self.id}:{self.number}\"\n    \nclass Contact:\n    def __init__(self, name):\n        self.name = name\n        self.fones = []\n        self.favorited = False\n\n    def addFone(self, id, number):\n        f =    Fone(id, number)\n        if f.isValid():\n            self.fones.append(f)\n        else:\n            print(\"Fone Ruim\")\n\n    def rmFone(self, index): \n        if index >= 0 and index < len(self.fones):\n            self.fones.pop(index)\n        else:\n            print(\"Indice n\u00e3o existe\")\n\n    def toggleFavorited(self):\n        self.favorited = not self.favorited\n\n    def isFavorited(self):\n        return self.favorited\n    \n    def __str__(self):\n        saida_fones = []\n        for f in self.fones:\n            saida_fones.append(str(f))\n        prefixo = \"@\" if self.favorited else \"-\"\n\n        return f\"{prefixo} {self.name} [{', '.join(saida_fones)}]\"\nclass Agenda:\n    def __init__(self):\n        self.contacts = []\n\n    def findPosByName(self, name):\n        for i in range(len(self.contacts)):\n            if self.contacts[i].name == name:\n                return i\n        return -1\n    def addContact(self, name, fones):\n        pos = self.findPosByName(name)\n\n        if pos != -1:\n            contato = self.contacts[pos]\n        else:\n            contato = Contact(name)\n            self.contacts.append(contato)\n            self.contacts.sort(key=lambda c: c.name)\n\n        for f in fones:\n            contato.addFone(f.id, f.number)\n\n    def rmContact(self, name):\n        pos = self.findPosByName(name)\n        if pos != -1:\n            self.contacts.pop(pos)\n\n    def getFavorited(self):\n        favs = []\n        for c in self.contacts:\n            if c.isFavorited():\n                favs.append(c)\n        return favs\n\n\n    def search(self, pattern):\n        res = []\n        for c in self.contacts:\n            if pattern in str(c):\n                res.append(c)\n        return res\n    \n    def getContacts(self):\n        return self.contacts\n    \n    def __str__(self):\n        saida = \"\"\n        for c in self.contacts:\n            saida += str(c) + \"\\n\"\n        return saida.strip()\n\ndef main():\n    agenda = Agenda()\n    while True:\n        try:\n            line = input()\n            if not line:\n                break\n            if not line.strip():\n                continue\n\n            print(f\"${line}\" if not line.startswith(\"$\") else line)\n                \n            if line.startswith(\"$\"):\n                line = line[1:]\n\n            parts = line.split()\n            if not parts:\n                continue\n\n            cmd = parts[0]\n\n            if cmd == \"end\":\n                break\n\n            elif cmd == \"add\":\n                name = parts[1]\n                fones_args = parts[2:]\n                lista_fones = []\n                for token in fones_args:\n                    dados = token.split(\":\")\n                    if len(dados) == 2:\n                        lista_fones.append(Fone(dados[0], dados[1]))\n\n                agenda.addContact(name, lista_fones)\n\n            elif cmd == \"rmFone\":\n                name = parts[1]\n                index =  int(parts[2])\n                pos = agenda.findPosByName(name)\n                if pos != -1:\n                    agenda.contacts[pos].rmFone(index)\n\n            elif cmd == \"show\":\n                print(agenda)\n            \n            elif cmd == \"rm\":\n                name = parts[1]\n                agenda.rmContact(name)\n\n            elif cmd == \"search\":\n                pattern = parts[1]\n                res = agenda.search(pattern)\n                for c in res:\n                    print(c)\n\n            elif cmd == \"tfav\":\n                name = parts[1]\n                pos = agenda.findPosByName(name)\n                if pos != -1:\n                    agenda.contacts[pos].toggleFavorited()\n\n            elif cmd == \"favs\":\n                res = agenda.getFavorited()\n                for c in res:\n                    print(c)\n\n        except EOFError:\n                break\n        except Exception as e:\n            print(\"Deu erro no loop:\", e)\n\nif __name__ == \"__main__\":\n    main()\n\n    ",
+            "lines": "175"
         }
     ]
 }
