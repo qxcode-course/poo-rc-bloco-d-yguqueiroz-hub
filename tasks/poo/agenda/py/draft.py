@@ -18,7 +18,7 @@ class Fone:
 class Contact:
     def __init__(self, name):
         self.name = name
-        self.fones = []
+         self.fones = []
         self.favorited = False
 
     def addFone(self, id, number):
@@ -69,7 +69,8 @@ class Agenda:
         for f in fones:
             contato.addFone(f.id, f.number)
 
-    def search(self, pattern):
+    def search(self, pa
+            ttern):
         res = []
         for c in self.contacts:
             if pattern in str(c):
@@ -96,3 +97,8 @@ try:
     print(a)
 except Exception as e:
     print("deu erro na agenda: ", e)
+
+agenda = Agenda()
+
+while True:
+    line = input("$")
